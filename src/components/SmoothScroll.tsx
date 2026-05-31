@@ -5,6 +5,9 @@ import Lenis from 'lenis';
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    // Disable smooth scrolljacking completely on mobile/tablet viewports for natively optimized momentum touch scrolling
+    if (window.innerWidth < 768) return;
+
     // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.4,

@@ -76,7 +76,7 @@ export default function SectionMeet() {
       <div className="absolute inset-0 bg-grid-lines pointer-events-none opacity-10" />
 
       <motion.div 
-        style={{ y: yOffset, opacity: opacityCore }}
+        style={{ y: isDesktop ? yOffset : 0, opacity: isDesktop ? opacityCore : 1 }}
         className="w-full max-w-7xl relative z-10 space-y-32"
       >
         {/* Main upper fold */}

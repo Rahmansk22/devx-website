@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import DevXLogo from './DevXLogo';
 import HLSVideo from './HLSVideo';
@@ -12,9 +12,10 @@ interface DispersalCharProps {
   progress: MotionValue<number>;
   className?: string;
   isStarX?: boolean;
+  isMobile?: boolean;
 }
 
-function DispersalChar({ char, index, total, progress, className = "", isStarX = false }: DispersalCharProps) {
+function DispersalChar({ char, index, total, progress, className = "", isStarX = false, isMobile = false }: DispersalCharProps) {
   const angle = (index / total) * Math.PI * 2;
   const factorX = Math.cos(angle) * 550; // Wide cinematic dispersion
   const factorY = Math.sin(angle) * 300;
@@ -25,10 +26,16 @@ function DispersalChar({ char, index, total, progress, className = "", isStarX =
   const scale = useTransform(progress, [0, 0.85], [1, 0.3]);
   const opacity = useTransform(progress, [0, 0.8], [1, 0]);
 
+  const xVal = isMobile ? 0 : x;
+  const yVal = isMobile ? 0 : y;
+  const rotateVal = isMobile ? 0 : rotate;
+  const scaleVal = isMobile ? 1 : scale;
+  const opacityVal = isMobile ? 1 : opacity;
+
   if (isStarX) {
     return (
       <motion.span
-        style={{ x, y, rotate, scale, opacity, display: 'inline-block', originX: 0.5, originY: 0.5 }}
+        style={{ x: xVal, y: yVal, rotate: rotateVal, scale: scaleVal, opacity: opacityVal, display: 'inline-block', originX: 0.5, originY: 0.5 }}
         animate={{
           scale: [1, 1.05, 1],
           filter: [
@@ -51,7 +58,7 @@ function DispersalChar({ char, index, total, progress, className = "", isStarX =
 
   return (
     <motion.span
-      style={{ x, y, rotate, scale, opacity, display: 'inline-block', originX: 0.5, originY: 0.5 }}
+      style={{ x: xVal, y: yVal, rotate: rotateVal, scale: scaleVal, opacity: opacityVal, display: 'inline-block', originX: 0.5, originY: 0.5 }}
       className={`${className} font-headline font-bold selection:bg-[#7c5cff] pb-10 pt-2 overflow-visible`}
     >
       {char === ' ' ? '\u00A0' : char}
@@ -63,6 +70,14 @@ export default function SectionReveal() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -94,6 +109,8 @@ export default function SectionReveal() {
   const logoY = useTransform(scrollYProgress, [0, 0.85], [0, -100]);
   const logoX = useTransform(scrollYProgress, [0, 0.85], [0, 250]);
   const logoRotate = useTransform(scrollYProgress, [0, 0.85], [0, 45]);
+
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.8, 0.95], [1, 0.9, 0]);
 
   // Track mouse coordinates for interactive particle wind drift
   useEffect(() => {
@@ -203,16 +220,16 @@ export default function SectionReveal() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[130vh] bg-black overflow-hidden"
+      className={isMobile ? "relative w-full h-screen bg-black overflow-hidden" : "relative w-full h-[130vh] bg-black overflow-hidden"}
       id="devx-section-reveal"
     >
       {/* Sticky container */}
-      <div className="sticky top-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div className={isMobile ? "relative w-full h-full flex flex-col items-center justify-center overflow-hidden" : "sticky top-0 w-full h-screen flex flex-col items-center justify-center overflow-hidden"}>
         
         {/* Fullscreen Background Video Stream playing Mux Stream 2 (100% fully visible, bright, and vibrant) */}
         <motion.div
           style={{
-            opacity: useTransform(scrollYProgress, [0, 0.8, 0.95], [1, 0.9, 0]), // Full 100% opacity for absolute visibility
+            opacity: isMobile ? 1 : videoOpacity, // Full 100% opacity for absolute visibility
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
           }}
@@ -245,9 +262,9 @@ export default function SectionReveal() {
             {/* Line 1: Introducing with separate scroll parallax & dynamic letter dispersion */}
             <motion.span
               style={{
-                y: introducingY,
-                opacity: introducingOpacity,
-                filter: introducingBlur,
+                y: isMobile ? 0 : introducingY,
+                opacity: isMobile ? 1 : introducingOpacity,
+                filter: isMobile ? 'blur(0px)' : introducingBlur,
               }}
               className="block bg-gradient-to-b from-white via-white to-neutral-400 bg-clip-text text-transparent pb-12 overflow-visible"
             >
@@ -258,6 +275,7 @@ export default function SectionReveal() {
                   index={index}
                   total={11}
                   progress={scrollYProgress}
+                  isMobile={isMobile}
                   className="bg-gradient-to-b from-white via-white to-neutral-400 bg-clip-text text-transparent"
                 />
               ))}
@@ -266,10 +284,10 @@ export default function SectionReveal() {
             {/* Line 2: Dev X + Logo on the Right with separate scroll parallax & dynamic letter dispersion */}
             <motion.span
               style={{
-                y: devxY,
-                scale: devxScale,
-                opacity: devxOpacity,
-                filter: devxBlur,
+                y: isMobile ? 0 : devxY,
+                scale: isMobile ? 1 : devxScale,
+                opacity: isMobile ? 1 : devxOpacity,
+                filter: isMobile ? 'blur(0px)' : devxBlur,
               }}
               className="flex items-center justify-center gap-2 sm:gap-4 mt-2 md:mt-4"
             >
@@ -281,6 +299,7 @@ export default function SectionReveal() {
                     index={index + 11}
                     total={15}
                     progress={scrollYProgress}
+                    isMobile={isMobile}
                     className="bg-gradient-to-b from-white via-white to-neutral-400 bg-clip-text text-transparent"
                   />
                 ))}
@@ -293,14 +312,15 @@ export default function SectionReveal() {
                 total={15}
                 progress={scrollYProgress}
                 isStarX={true}
+                isMobile={isMobile}
               />
               <motion.span
                 style={{
-                  opacity: logoOpacity,
-                  scale: logoScale,
-                  y: logoY,
-                  x: logoX,
-                  rotate: logoRotate,
+                  opacity: isMobile ? 1 : logoOpacity,
+                  scale: isMobile ? 1 : logoScale,
+                  y: isMobile ? 0 : logoY,
+                  x: isMobile ? 0 : logoX,
+                  rotate: isMobile ? 0 : logoRotate,
                 }}
                 className="w-16 h-16 sm:w-24 sm:h-24 md:w-[130px] md:h-[130px] flex items-center justify-center drop-shadow-[0_0_35px_rgba(0,212,255,0.45)] ml-2"
               >
@@ -312,10 +332,10 @@ export default function SectionReveal() {
           {/* Tagline: व्हिच टर्न्स सिम्पल आयडियाज टू ॲप्स */}
           <motion.p
             style={{
-              opacity: taglineOpacity,
-              y: taglineY,
-              scale: taglineScale,
-              filter: taglineBlur,
+              opacity: isMobile ? 1 : taglineOpacity,
+              y: isMobile ? 0 : taglineY,
+              scale: isMobile ? 1 : taglineScale,
+              filter: isMobile ? 'blur(0px)' : taglineBlur,
             }}
             className="text-lg sm:text-2xl md:text-[2.2rem] font-light max-w-4xl leading-relaxed mt-6 text-center font-sans tracking-tight bg-gradient-to-b from-white via-white to-neutral-400 bg-clip-text text-transparent select-none pb-4"
           >
