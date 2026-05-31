@@ -1,103 +1,160 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import SectionReveal from '@/components/SectionReveal';
+import SectionMeet from '@/components/SectionMeet';
+import SectionIdea from '@/components/SectionIdea';
+import SectionHorizontal from '@/components/SectionHorizontal';
+import SectionShowcase from '@/components/SectionShowcase';
+import SectionEngine from '@/components/SectionEngine';
+import SectionFuture from '@/components/SectionFuture';
+
+import DevXLogo from '@/components/DevXLogo';
+
+const SECTIONS = [
+  { id: 'reveal', label: 'Reveal' },
+  { id: 'meet', label: 'Overview' },
+  { id: 'idea', label: 'Workflow' },
+  { id: 'horizontal', label: 'Cycle' },
+  { id: 'showcase', label: 'Showcase' },
+  { id: 'engine', label: 'Engine' },
+  { id: 'future', label: 'Waitlist' }
+];
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { scrollYProgress } = useScroll();
+  
+  // Spring settings for global progress bar
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const [activeSection, setActiveSection] = useState('reveal');
+
+  // Track active section to light up timeline markers
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+      
+      const elements = {
+        reveal: document.getElementById('devx-section-reveal'),
+        meet: document.getElementById('devx-section-meet'),
+        idea: document.getElementById('devx-section-idea'),
+        horizontal: document.getElementById('devx-section-horizontal'),
+        showcase: document.getElementById('devx-section-showcase'),
+        engine: document.getElementById('devx-section-engine'),
+        future: document.getElementById('devx-section-future'),
+      };
+
+      for (const [key, element] of Object.entries(elements)) {
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
+            setActiveSection(key);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(`devx-section-${id}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="relative bg-black min-h-screen text-white font-sans antialiased overflow-x-hidden selection:bg-[#7c5cff]">
+      
+      {/* 1. Global Progress Bar (Top) */}
+      <motion.div 
+        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#7c5cff] via-[#00d4ff] to-white origin-left z-[100] pointer-events-none"
+      />
+
+      {/* 2. Sleek Glassmorphic Floating Header (Navigation) */}
+      <header className="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl h-14 premium-card border border-white/5 bg-black/45 backdrop-blur-xl rounded-full px-6 flex justify-between items-center z-[90] select-none shadow-2xl">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('reveal')}>
+          <DevXLogo size={32} interactive={false} glow={false} />
+          <span className="font-headline font-bold text-sm tracking-widest text-white uppercase">DevX</span>
         </div>
+
+        {/* Desktop Nav Items */}
+        <nav className="hidden md:flex items-center gap-6 text-xs font-mono tracking-widest uppercase text-neutral-400">
+          {SECTIONS.map((sec) => (
+            <button
+              key={sec.id}
+              onClick={() => scrollToSection(sec.id)}
+              className={`hover:text-white transition-colors cursor-pointer relative py-1 ${
+                activeSection === sec.id ? 'text-white font-semibold' : ''
+              }`}
+            >
+              {sec.label}
+              {activeSection === sec.id && (
+                <motion.span
+                  layoutId="activeNavIndicator"
+                  className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#7c5cff] rounded-full"
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
+            </button>
+          ))}
+        </nav>
+
+        {/* Join Waitlist CTA action */}
+        <button
+          onClick={() => scrollToSection('future')}
+          className="px-4 py-2 rounded-full bg-white text-black hover:bg-neutral-100 font-headline font-semibold text-[10px] sm:text-xs uppercase tracking-wider border border-white transition-all duration-300 shadow-lg shadow-white/5 cursor-pointer"
+        >
+          Join Waitlist
+        </button>
+      </header>
+
+      {/* 3. Global Floating Scroll Index Timeline (Right Side) */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-5 z-[90] select-none">
+        {SECTIONS.map((sec) => (
+          <button
+            key={sec.id}
+            onClick={() => scrollToSection(sec.id)}
+            className="group flex items-center justify-end gap-3 text-right cursor-pointer"
+          >
+            <span className="opacity-0 group-hover:opacity-100 text-[9px] font-mono tracking-widest uppercase text-neutral-400 transition-opacity duration-300">
+              {sec.label}
+            </span>
+            <div 
+              className={`w-2.5 h-2.5 rounded-full border transition-all duration-300 ${
+                activeSection === sec.id 
+                  ? 'bg-white border-white scale-125 shadow-glow' 
+                  : 'bg-black border-neutral-700 group-hover:border-neutral-500'
+              }`}
+              style={{
+                boxShadow: activeSection === sec.id ? '0 0 10px #7c5cff, 0 0 5px #00d4ff' : undefined
+              }}
+            />
+          </button>
+        ))}
+      </div>
+
+      {/* 4. Full Story-driven Interactive Layout */}
+      <main className="w-full h-auto">
+        <SectionReveal />
+        <SectionMeet />
+        <SectionIdea />
+        <SectionHorizontal />
+        <SectionShowcase />
+        <SectionEngine />
+        <SectionFuture />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
     </div>
   );
 }
