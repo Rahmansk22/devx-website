@@ -210,7 +210,7 @@ export default function SectionHorizontal() {
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-24 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10 my-6">
         
         {/* LEFT: Floating spatial narrative stage details (Pure typography, borderless) */}
-        <div className="lg:col-span-4 text-left space-y-6 flex flex-col justify-center h-[260px] lg:h-auto">
+        <div className="lg:col-span-4 text-left space-y-6 flex flex-col justify-center h-auto lg:h-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeStage.id}
@@ -316,8 +316,8 @@ export default function SectionHorizontal() {
 
         </div>
 
-        {/* RIGHT: Floating active compile source code visualizer (Pure text/snippet, borderless) */}
-        <div className="lg:col-span-4 h-[240px] lg:h-auto flex flex-col justify-center">
+        {/* RIGHT: Floating active active compile source code visualizer (Pure text/snippet, borderless) */}
+        <div className="lg:col-span-4 h-auto lg:h-auto flex flex-col justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeStage.id}

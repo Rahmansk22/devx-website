@@ -31,7 +31,7 @@ function MagneticButton({ children, onClick, disabled }: { children: React.React
       disabled={disabled}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: 'spring', stiffness: 250, damping: 20, mass: 0.5 }}
-      className="relative z-10 select-none cursor-pointer flex items-center gap-2.5 px-8 py-4 rounded-full bg-white text-black hover:bg-neutral-100 font-headline font-semibold text-sm sm:text-base border border-white shadow-xl shadow-[#7c5cff]/10 hover:shadow-[#7c5cff]/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
+      className="relative z-10 select-none cursor-pointer flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-full bg-white text-black hover:bg-neutral-100 font-headline font-semibold text-sm sm:text-base border border-white shadow-xl shadow-[#7c5cff]/10 hover:shadow-[#7c5cff]/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
     >
       {children}
     </motion.button>
@@ -258,14 +258,14 @@ export default function SectionFuture() {
                 transition={{ duration: 0.4 }}
                 className="space-y-4"
               >
-                <div className="relative rounded-full border border-white/10 bg-black/60 p-1.5 flex items-center justify-between shadow-2xl focus-within:border-[#7c5cff]/50 focus-within:shadow-[0_0_35px_rgba(124,92,255,0.08)] transition-all duration-300">
+                <div className="relative flex flex-col sm:flex-row gap-3 sm:gap-0 border border-white/10 bg-black/60 p-2 sm:p-1.5 rounded-3xl sm:rounded-full shadow-2xl focus-within:border-[#7c5cff]/50 focus-within:shadow-[0_0_35px_rgba(124,92,255,0.08)] transition-all duration-300">
                   <input
                     type="email"
                     placeholder="Enter your professional email..."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    className="flex-1 bg-transparent border-none text-white text-sm sm:text-base font-sans px-5 focus:outline-none placeholder-neutral-600 disabled:opacity-50"
+                    className="flex-1 bg-transparent border-none text-white text-sm sm:text-base font-sans px-4 sm:px-5 py-2.5 sm:py-0 focus:outline-none placeholder-neutral-600 disabled:opacity-50 w-full"
                   />
                   
                   <MagneticButton disabled={isSubmitting}>

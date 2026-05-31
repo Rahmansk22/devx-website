@@ -200,7 +200,7 @@ export default function SectionIdea() {
       <div className="w-full max-w-7xl mx-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center px-6 sm:px-12 md:px-24 py-8 z-10">
         
         {/* Left Panel: Neo-Glow Timeline & Narrative Copy */}
-        <div className="lg:col-span-5 h-[32vh] lg:h-auto flex items-stretch text-left relative overflow-hidden select-none pl-4">
+        <div className="lg:col-span-5 h-auto lg:h-auto flex items-stretch text-left relative overflow-hidden select-none pl-4">
           
           {/* High-tech vertical glow timeline tracker (Fully Clickable) */}
           <div className="w-[3px] bg-neutral-900/60 rounded-full relative mr-6 hidden sm:block">
@@ -282,7 +282,7 @@ export default function SectionIdea() {
         </div>
 
         {/* Right Panel: Interactive 3D Parallax Compiler IDE */}
-        <div className="lg:col-span-7 min-h-[460px] lg:h-[500px] w-full flex items-center justify-center relative p-1">
+        <div className="lg:col-span-7 h-auto lg:h-[500px] w-full flex items-center justify-center relative p-1">
           
           {/* Sliding Chevron Left */}
           <button
@@ -341,7 +341,7 @@ export default function SectionIdea() {
             transition={{ type: 'spring', stiffness: 350, damping: 25 }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="w-full h-full max-w-[680px] max-h-[460px] bg-[#0c0c0e]/95 border border-white/5 rounded-2xl flex flex-col sm:flex-row overflow-hidden shadow-[0_0_60px_-15px_rgba(124,92,255,0.25)] relative transition-all duration-300 hover:border-white/10 cursor-grab active:cursor-grabbing text-white"
+            className="w-full h-auto sm:h-full max-w-[680px] sm:max-h-[460px] bg-[#0c0c0e]/95 border border-white/5 rounded-2xl flex flex-col sm:flex-row overflow-hidden shadow-[0_0_60px_-15px_rgba(124,92,255,0.25)] relative transition-all duration-300 hover:border-white/10 cursor-grab active:cursor-grabbing text-white"
           >
             {/* Spotlight reflection */}
             <div 

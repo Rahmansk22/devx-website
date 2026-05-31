@@ -137,22 +137,22 @@ export default function SectionEngine() {
           </div>
 
           {/* Expanded System Stats Panel (Deep Developer Detail) */}
-          <div className="grid grid-cols-4 gap-3">
-            <div className="bg-neutral-950 border border-white/5 p-3 rounded-xl flex flex-col text-left font-mono">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+            <div className="bg-neutral-950 border border-white/5 p-2 sm:p-3 rounded-xl flex flex-col text-left font-mono">
               <span className="text-[7px] text-neutral-500 uppercase font-bold">CPU LOAD</span>
-              <span className="text-sm font-semibold text-white mt-1">{activeAgent.stats.cpu}</span>
+              <span className="text-xs sm:text-sm font-semibold text-white mt-1">{activeAgent.stats.cpu}</span>
             </div>
-            <div className="bg-neutral-950 border border-white/5 p-3 rounded-xl flex flex-col text-left font-mono">
+            <div className="bg-neutral-950 border border-white/5 p-2 sm:p-3 rounded-xl flex flex-col text-left font-mono">
               <span className="text-[7px] text-neutral-500 uppercase font-bold">TOKENS SEC</span>
-              <span className="text-sm font-semibold text-[#7c5cff] mt-1">{activeAgent.stats.tokens}</span>
+              <span className="text-xs sm:text-sm font-semibold text-[#7c5cff] mt-1">{activeAgent.stats.tokens}</span>
             </div>
-            <div className="bg-neutral-950 border border-white/5 p-3 rounded-xl flex flex-col text-left font-mono">
+            <div className="bg-neutral-950 border border-white/5 p-2 sm:p-3 rounded-xl flex flex-col text-left font-mono">
               <span className="text-[7px] text-neutral-500 uppercase font-bold">INTEGRITY</span>
-              <span className="text-sm font-semibold text-emerald-400 mt-1">{activeAgent.stats.integrity}</span>
+              <span className="text-xs sm:text-sm font-semibold text-emerald-400 mt-1">{activeAgent.stats.integrity}</span>
             </div>
-            <div className="bg-neutral-950 border border-white/5 p-3 rounded-xl flex flex-col text-left font-mono">
+            <div className="bg-neutral-950 border border-white/5 p-2 sm:p-3 rounded-xl flex flex-col text-left font-mono">
               <span className="text-[7px] text-neutral-500 uppercase font-bold">COMPILE SPEED</span>
-              <span className="text-sm font-semibold text-[#00d4ff] mt-1">{activeAgent.stats.speed}</span>
+              <span className="text-xs sm:text-sm font-semibold text-[#00d4ff] mt-1">{activeAgent.stats.speed}</span>
             </div>
           </div>
 

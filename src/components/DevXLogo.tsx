@@ -67,8 +67,8 @@ export default function DevXLogo({
       ref={containerRef}
       className={`relative select-none flex items-center justify-center ${className}`}
       style={{ 
-        width: size, 
-        height: size,
+        width: className.includes('w-') ? undefined : size, 
+        height: className.includes('h-') ? undefined : size,
         perspective: 800
       }}
     >

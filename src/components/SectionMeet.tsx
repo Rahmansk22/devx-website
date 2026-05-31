@@ -94,7 +94,7 @@ export default function SectionMeet() {
               <span className="text-xs font-mono uppercase tracking-widest text-[#00d4ff]">THE COGNITIVE PLATFORM</span>
             </motion.div>
 
-            <h2 className="text-5xl sm:text-7xl md:text-8xl font-bold font-headline tracking-tighter leading-[0.85] text-white">
+            <h2 className="text-4xl xs:text-5xl sm:text-7xl md:text-8xl font-bold font-headline tracking-tighter leading-[0.85] text-white">
               Meet Dev X.
             </h2>
 
@@ -102,19 +102,19 @@ export default function SectionMeet() {
               An agentic orchestration engine for autonomous full-stack development. Dev X converts natural concepts into secure, production-grade Next.js, Prisma, and PostgreSQL software systems.
             </p>
 
-            <div className="h-[70px] sm:h-[90px] flex items-center overflow-hidden text-left select-none">
-              <span className="text-2xl sm:text-4xl text-neutral-400 font-light font-headline tracking-tight">
+            <div className="flex flex-col sm:flex-row sm:items-center items-start justify-start gap-1 sm:gap-0 h-auto sm:h-[90px] overflow-hidden text-left select-none">
+              <span className="text-xl xs:text-2xl sm:text-4xl text-neutral-400 font-light font-headline tracking-tight">
                 DevX synthesises complete&nbsp;
               </span>
-              <div className="relative inline-block h-full min-w-[200px]">
+              <div className="relative inline-block h-[40px] sm:h-full min-w-[160px] sm:min-w-[200px]">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={words[index]}
-                    initial={{ y: 30, opacity: 0, filter: 'blur(8px)' }}
+                    initial={{ y: 20, opacity: 0, filter: 'blur(8px)' }}
                     animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-                    exit={{ y: -30, opacity: 0, filter: 'blur(8px)' }}
+                    exit={{ y: -20, opacity: 0, filter: 'blur(8px)' }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] via-[#7c5cff] to-[#00d4ff] drop-shadow-[0_0_20px_rgba(0,212,255,0.4)] font-headline tracking-tight"
+                    className="absolute left-0 top-1/2 -translate-y-1/2 text-xl xs:text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] via-[#7c5cff] to-[#00d4ff] drop-shadow-[0_0_20px_rgba(0,212,255,0.4)] font-headline tracking-tight"
                   >
                     {words[index]}
                   </motion.span>
@@ -130,8 +130,8 @@ export default function SectionMeet() {
           >
             <div className="absolute w-[350px] h-[350px] rounded-full bg-[#7c5cff]/10 filter blur-[90px]" />
             <AICore intensity={1.25} scale={1.1} className="w-full h-full z-10" />
-            <div className="absolute z-20 pointer-events-none select-none flex items-center justify-center">
-              <DevXLogo size={240} glow={true} interactive={true} />
+            <div className="absolute z-20 pointer-events-none select-none flex items-center justify-center w-[160px] h-[160px] sm:w-[240px] sm:h-[240px]">
+              <DevXLogo size={240} glow={true} interactive={true} className="w-full h-full" />
             </div>
           </motion.div>
         </div>

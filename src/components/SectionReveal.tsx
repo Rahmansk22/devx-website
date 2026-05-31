@@ -69,7 +69,6 @@ export default function SectionReveal() {
     offset: ['start start', 'end start'],
   });
 
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.95], [0.15, 0.5]);
   const gridBrightness = useTransform(scrollYProgress, [0, 0.95], [0.15, 0.35]);
 
   // Scroll transforms for Line 1: "Introducing"
@@ -214,11 +213,12 @@ export default function SectionReveal() {
         <motion.div
           style={{
             opacity: useTransform(scrollYProgress, [0, 0.8, 0.95], [1, 0.9, 0]), // Full 100% opacity for absolute visibility
-            scale: useTransform(scrollYProgress, [0, 0.95], [1, 1.05]),
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
           }}
-          className="absolute inset-0 w-full h-full object-cover z-[1] pointer-events-none filter brightness-[1.12] contrast-[1.62] saturate-[1.3] select-none transition-all duration-300"
+          className="absolute inset-0 w-full h-full z-[1] pointer-events-none select-none transform translate-z-0 will-change-transform filter brightness-[1.12] contrast-[1.62] saturate-[1.3]"
         >
-          <HLSVideo src="https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8" className="w-full h-full object-cover" />
+          <HLSVideo src="https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8" className="w-full h-full object-cover transform translate-z-0 will-change-transform" />
         </motion.div>
 
         {/* Custom Premium Floating Particle Canvas Overlay */}
@@ -233,30 +233,15 @@ export default function SectionReveal() {
           className="absolute inset-0 bg-grid-lines pointer-events-none transition-all duration-300 z-[2]" 
         />
 
-        {/* Shifting radial spotlight gradient */}
-        <motion.div
-          style={{ opacity: glowOpacity }}
-          className="absolute w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(124,92,255,0.25)_0%,rgba(0,212,255,0.06)_50%,rgba(0,0,0,0)_70%)] pointer-events-none filter blur-[120px] gpu-accelerated z-[2]"
-        />
-
         {/* Ambient base layer: moved behind video (z-0) and set to low opacity as a soft vignette */}
         <div className="absolute inset-0 bg-radial-gradient-black opacity-30 pointer-events-none z-0" />
-
-        {/* Ambient premium glowing back halo for Apple reveal lockup */}
-        <motion.div
-          style={{
-            opacity: useTransform(scrollYProgress, [0, 0.5, 0.95], [0.4, 0.8, 0]),
-            scale: useTransform(scrollYProgress, [0, 0.95], [0.9, 1.25]),
-          }}
-          className="absolute z-[3] w-[450px] h-[450px] rounded-full bg-[radial-gradient(circle,rgba(0,212,255,0.25)_0%,rgba(124,92,255,0.1)_50%,rgba(0,0,0,0)_80%)] pointer-events-none filter blur-[60px] gpu-accelerated select-none"
-        />
 
         {/* Central Premium Apple-Style Lockup */}
         <motion.div
           className="relative z-20 text-center flex flex-col items-center justify-center px-4 gpu-accelerated select-none"
         >
           {/* Main Brand Title - "Introducing" on Line 1, "Dev X" + Logo on the right on Line 2 */}
-          <h1 className="text-5xl sm:text-7xl md:text-[9.5rem] font-bold font-headline tracking-tighter leading-[1.12] text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.2)] mb-6 select-none flex flex-col items-center overflow-visible">
+          <h1 className="text-[2.6rem] sm:text-7xl md:text-[9.5rem] font-bold font-headline tracking-tighter leading-[1.12] text-white drop-shadow-[0_4px_30px_rgba(255,255,255,0.2)] mb-6 select-none flex flex-col items-center overflow-visible">
             {/* Line 1: Introducing with separate scroll parallax & dynamic letter dispersion */}
             <motion.span
               style={{
@@ -319,7 +304,7 @@ export default function SectionReveal() {
                 }}
                 className="w-16 h-16 sm:w-24 sm:h-24 md:w-[130px] md:h-[130px] flex items-center justify-center drop-shadow-[0_0_35px_rgba(0,212,255,0.45)] ml-2"
               >
-                <DevXLogo size={130} interactive={true} glow={true} />
+                <DevXLogo size={130} interactive={true} glow={true} className="w-full h-full" />
               </motion.span>
             </motion.span>
           </h1>

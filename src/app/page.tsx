@@ -4,10 +4,13 @@ import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import SectionReveal from '@/components/SectionReveal';
 import SectionMeet from '@/components/SectionMeet';
+import SectionDemo from '@/components/SectionDemo';
 import SectionIdea from '@/components/SectionIdea';
 import SectionHorizontal from '@/components/SectionHorizontal';
 import SectionShowcase from '@/components/SectionShowcase';
 import SectionEngine from '@/components/SectionEngine';
+import SectionComparison from '@/components/SectionComparison';
+import SectionPricing from '@/components/SectionPricing';
 import SectionFuture from '@/components/SectionFuture';
 
 import DevXLogo from '@/components/DevXLogo';
@@ -15,10 +18,13 @@ import DevXLogo from '@/components/DevXLogo';
 const SECTIONS = [
   { id: 'reveal', label: 'Reveal' },
   { id: 'meet', label: 'Overview' },
+  { id: 'demo', label: 'Demo' },
   { id: 'idea', label: 'Workflow' },
   { id: 'horizontal', label: 'Cycle' },
   { id: 'showcase', label: 'Showcase' },
   { id: 'engine', label: 'Engine' },
+  { id: 'comparison', label: 'Compare' },
+  { id: 'pricing', label: 'Pricing' },
   { id: 'future', label: 'Waitlist' }
 ];
 
@@ -42,10 +48,13 @@ export default function Home() {
       const elements = {
         reveal: document.getElementById('devx-section-reveal'),
         meet: document.getElementById('devx-section-meet'),
+        demo: document.getElementById('devx-section-demo'),
         idea: document.getElementById('devx-section-idea'),
         horizontal: document.getElementById('devx-section-horizontal'),
         showcase: document.getElementById('devx-section-showcase'),
         engine: document.getElementById('devx-section-engine'),
+        comparison: document.getElementById('devx-section-comparison'),
+        pricing: document.getElementById('devx-section-pricing'),
         future: document.getElementById('devx-section-future'),
       };
 
@@ -150,10 +159,13 @@ export default function Home() {
       <main className="w-full h-auto">
         <SectionReveal />
         <SectionMeet />
+        <SectionDemo />
         <SectionIdea />
         <SectionHorizontal />
         <SectionShowcase />
         <SectionEngine />
+        <SectionComparison />
+        <SectionPricing />
         <SectionFuture />
       </main>
 
