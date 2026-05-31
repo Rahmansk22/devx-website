@@ -114,6 +114,27 @@ body {
   box-shadow: 0 10px 40px 0 rgba(124, 92, 255, 0.08);
 }
 
+/* Apple Water Liquid Crystal Glassmorphism */
+.apple-liquid-glass {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.5), 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-liquid-glass:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 50px rgba(124, 92, 255, 0.06), 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(255, 255, 255, 0.02);
+}
+
 /* Grid lines overlay */
 .bg-grid-lines {
   background-size: 40px 40px;

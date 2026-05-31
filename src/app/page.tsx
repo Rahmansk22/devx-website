@@ -82,7 +82,7 @@ export default function Home() {
       />
 
       {/* 2. Sleek Glassmorphic Floating Header (Navigation) */}
-      <header className="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl h-14 premium-card border border-white/5 bg-black/45 backdrop-blur-xl rounded-full px-6 flex justify-between items-center z-[90] select-none shadow-2xl">
+      <header className="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl h-14 apple-liquid-glass rounded-full px-6 flex justify-between items-center z-[90] select-none">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('reveal')}>
           <DevXLogo size={32} interactive={false} glow={false} />
           <span className="font-headline font-bold text-sm tracking-widest text-white uppercase">
