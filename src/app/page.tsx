@@ -85,25 +85,27 @@ export default function Home() {
       <header className="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl h-14 premium-card border border-white/5 bg-black/45 backdrop-blur-xl rounded-full px-6 flex justify-between items-center z-[90] select-none shadow-2xl">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('reveal')}>
           <DevXLogo size={32} interactive={false} glow={false} />
-          <span className="font-headline font-bold text-sm tracking-widest text-white uppercase">DevX</span>
+          <span className="font-headline font-bold text-sm tracking-widest text-white uppercase">
+            Dev <span className="text-[#7c5cff] drop-shadow-[0_0_8px_rgba(124,92,255,0.6)]">X</span>
+          </span>
         </div>
 
         {/* Desktop Nav Items */}
-        <nav className="hidden md:flex items-center gap-6 text-xs font-mono tracking-widest uppercase text-neutral-400">
+        <nav className="hidden md:flex items-center gap-1.5 text-xs font-mono tracking-widest uppercase text-neutral-400">
           {SECTIONS.map((sec) => (
             <button
               key={sec.id}
               onClick={() => scrollToSection(sec.id)}
-              className={`hover:text-white transition-colors cursor-pointer relative py-1 ${
-                activeSection === sec.id ? 'text-white font-semibold' : ''
+              className={`hover:text-white transition-all cursor-pointer relative px-3 py-1.5 rounded-full text-[10px] tracking-wider transition-colors duration-300 ${
+                activeSection === sec.id ? 'text-white font-semibold' : 'hover:bg-white/[0.02]'
               }`}
             >
-              {sec.label}
+              <span className="relative z-10">{sec.label}</span>
               {activeSection === sec.id && (
                 <motion.span
                   layoutId="activeNavIndicator"
-                  className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#7c5cff] rounded-full"
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  className="absolute inset-0 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(124,92,255,0.15)] pointer-events-none"
+                  transition={{ type: 'spring', stiffness: 320, damping: 25 }}
                 />
               )}
             </button>

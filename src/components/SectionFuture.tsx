@@ -309,7 +309,7 @@ export default function SectionFuture() {
                 <div className="space-y-2 select-text">
                   <h4 className="text-xl font-headline font-bold text-white">Queue Spot Reserved</h4>
                   <p className="text-xs text-neutral-400 font-sans max-w-xs leading-relaxed">
-                    We have dispatched verification and edge sandbox tokens directly to <span className="text-[#00d4ff] font-semibold font-mono">{email}</span>.
+                    Thanks for joining! We will keep you updated and inform you at <span className="text-[#00d4ff] font-semibold font-mono">{email}</span> once the site is live.
                   </p>
                 </div>
 
