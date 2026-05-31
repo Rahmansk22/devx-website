@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="metalBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="35%" stop-color="#EDEDED" />
+      <stop offset="70%" stop-color="#D8D8D8" />
+      <stop offset="100%" stop-color="#A8A8A8" />
+    </linearGradient>
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#00A2FF" />
+    </linearGradient>
+    <linearGradient id="visorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#252525" />
+      <stop offset="50%" stop-color="#0D0D0D" />
+      <stop offset="100%" stop-color="#050505" />
+    </linearGradient>
+    <radialGradient id="eyeOptic" cx="45%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="25%" stop-color="#80F5FF" />
+      <stop offset="60%" stop-color="#00D4FF" />
+      <stop offset="100%" stop-color="#005A7F" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Ears -->
+  <rect x="35" y="195" width="40" height="110" rx="20" fill="url(#metalBody)" stroke="#9C9C9C" stroke-width="2" />
+  <rect x="425" y="195" width="40" height="110" rx="20" fill="url(#metalBody)" stroke="#9C9C9C" stroke-width="2" />
+  
+  <!-- Main Head -->
+  <circle cx="250" cy="250" r="190" fill="url(#metalBody)" stroke="#9C9C9C" stroke-width="3" />
+  
+  <!-- Visor -->
+  <path d="M 96,215 C 96,215 160,175 250,175 C 340,175 404,215 404,215 C 404,215 422,230 422,260 C 422,290 398,310 398,310 C 398,310 340,325 250,325 C 160,325 102,310 102,310 C 102,310 78,290 78,260 C 78,230 96,215 96,215 Z" fill="url(#visorGrad)" stroke="#1D1D1D" stroke-width="4" />
+  
+  <!-- Glowing Left Eye -->
+  <circle cx="175" cy="245" r="22" fill="url(#eyeOptic)" />
+  
+  <!-- Glowing Right Eye -->
+  <circle cx="325" cy="245" r="22" fill="url(#eyeOptic)" />
+</svg>

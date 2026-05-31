@@ -97,14 +97,14 @@ export default function Home() {
               key={sec.id}
               onClick={() => scrollToSection(sec.id)}
               className={`hover:text-white transition-all cursor-pointer relative px-3 py-1.5 rounded-full text-[10px] tracking-wider transition-colors duration-300 ${
-                activeSection === sec.id ? 'text-white font-semibold' : 'hover:bg-white/[0.02]'
+                activeSection === sec.id ? 'text-white font-semibold' : 'hover:bg-white/[0.04]'
               }`}
             >
               <span className="relative z-10">{sec.label}</span>
               {activeSection === sec.id && (
                 <motion.span
                   layoutId="activeNavIndicator"
-                  className="absolute inset-0 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(124,92,255,0.15)] pointer-events-none"
+                  className="absolute inset-0 rounded-full liquid-glass-capsule pointer-events-none"
                   transition={{ type: 'spring', stiffness: 320, damping: 25 }}
                 />
               )}
